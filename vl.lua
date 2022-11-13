@@ -39,15 +39,15 @@ local function D(Connection)
 	end
 end
 
-D(UIS.TextBoxFocused)
-D(UIS.TextBoxFocusReleased)
-D(UIS.LastInputTypeChanged)
+D(UserInputService.TextBoxFocused)
+D(UserInputService.TextBoxFocusReleased)
+D(UserInputService.LastInputTypeChanged)
 GetFocusedTextBox = hookfunction(UIS.GetFocusedTextBox,function()
-	local res = GetFocusedTextBox(UIS)
+	local res = GetFocusedTextBox(UserInputService)
 	if not checkcaller() then
-		D(UIS.TextBoxFocused)
-		D(UIS.TextBoxFocusReleased)
-		D(UIS.LastInputTypeChanged)
+		D(UserInputService.TextBoxFocused)
+		D(UserInputService.TextBoxFocusReleased)
+		D(UserInputService.LastInputTypeChanged)
 		return Chat
 	end
 	return res
@@ -55,7 +55,7 @@ end)
 namecall = hookmetamethod(game,"__namecall",newcclosure(function(...)
 	local self,caller,method,args = ...,nil,getnamecallmethod(),{...}; table.remove(args,1)
 	if not checkcaller() then
-		if method == "GetFocusedTextBox" and self == UIS then
+		if method == "GetFocusedTextBox" and self == UserInputService then
 			return Chat
 		end
 	end
