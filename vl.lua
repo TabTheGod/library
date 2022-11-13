@@ -42,7 +42,7 @@ end
 D(UserInputService.TextBoxFocused)
 D(UserInputService.TextBoxFocusReleased)
 D(UserInputService.LastInputTypeChanged)
-GetFocusedTextBox = hookfunction(UIS.GetFocusedTextBox,function()
+GetFocusedTextBox = hookfunction(UserInputService.GetFocusedTextBox,function()
 	local res = GetFocusedTextBox(UserInputService)
 	if not checkcaller() then
 		D(UserInputService.TextBoxFocused)
