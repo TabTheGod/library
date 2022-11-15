@@ -33,39 +33,8 @@ local random = math.random
 
 -- UI Bypass
 
-local function D(Connection)
-	for i,v in pairs(getconnections(Connection)) do
-		v:Disable()
-	end
-end
-
-D(UserInputService.TextBoxFocused)
-D(UserInputService.TextBoxFocusReleased)
-D(UserInputService.LastInputTypeChanged)
-GetFocusedTextBox = hookfunction(UserInputService.GetFocusedTextBox,function()
-	local res = GetFocusedTextBox(UserInputService)
-	if not checkcaller() then
-		D(UserInputService.TextBoxFocused)
-		D(UserInputService.TextBoxFocusReleased)
-		D(UserInputService.LastInputTypeChanged)
-		return Chat
-	end
-	return res
-end)
-namecall = hookmetamethod(game,"__namecall",newcclosure(function(...)
-	local self,caller,method,args = ...,nil,getnamecallmethod(),{...}; table.remove(args,1)
-	if not checkcaller() then
-		if method == "GetFocusedTextBox" and self == UserInputService then
-			return Chat
-		end
-	end
-
-	return namecall(...)
-end))
-
 local ui = Instance.new("ScreenGui")
 Protect(ui, game:GetService("CoreGui"))
-ui:Protect(true)
 ui.Name = "Reach Net"
 ui.Parent = game.CoreGui
 ui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -1697,4 +1666,36 @@ function lib:Window(text, preset, closebind)
     end
     return tabhold
 end
+
+
+local function D(Connection)
+	for i,v in pairs(getconnections(Connection)) do
+		v:Disable()
+	end
+end
+
+D(UserInputService.TextBoxFocused)
+D(UserInputService.TextBoxFocusReleased)
+D(UserInputService.LastInputTypeChanged)
+GetFocusedTextBox = hookfunction(UserInputService.GetFocusedTextBox,function()
+	local res = GetFocusedTextBox(UserInputService)
+	if not checkcaller() then
+		D(UserInputService.TextBoxFocused)
+		D(UserInputService.TextBoxFocusReleased)
+		D(UserInputService.LastInputTypeChanged)
+		return Chat
+	end
+	return res
+end)
+namecall = hookmetamethod(game,"__namecall",newcclosure(function(...)
+	local self,caller,method,args = ...,nil,getnamecallmethod(),{...}; table.remove(args,1)
+	if not checkcaller() then
+		if method == "GetFocusedTextBox" and self == UserInputService then
+			return Chat
+		end
+	end
+
+	return namecall(...)
+end))
+
 return lib
