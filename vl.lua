@@ -4,7 +4,7 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
-local PresetColor = Color3.fromRGB(255,0,0)
+local PresetColor = Color3.fromRGB(13,105,172)
 local CloseBind = Enum.KeyCode.RightControl
 
 local function Protect(Object,Parent)
@@ -114,7 +114,7 @@ end
 
 function lib:Window(text, preset, closebind)
     CloseBind = closebind or Enum.KeyCode.RightControl
-    PresetColor = Color3.fromRGB(255,0,0)
+    PresetColor = Color3.fromRGB(13,105,172)
     fs = false
     local Main = Instance.new("Frame")
     local TabHold = Instance.new("Frame")
